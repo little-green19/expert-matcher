@@ -1,84 +1,104 @@
-# Expert Matcher
+🧩 Founder–Expert Matcher
 
-A minimal README template for the expert-matcher project. Replace the sections below with project-specific details.
+Connecting founders with experts who can help their projects grow — powered by Reddit insights.
 
-## Overview
+This tool analyzes publicly available Reddit discussions from entrepreneurial communities to identify potential matches between founders seeking help and experts offering skills or advice.
 
-Expert Matcher is a project for matching experts to requests (replace this with a short, specific description of what the project does, the problem it solves, and its main components).
+🚀 Project Overview
 
-## Features
+Many founders share their startup ideas or challenges on Reddit, while experts often comment offering guidance or collaboration.
+Founder–Expert Matcher uses the Reddit Data API to:
 
-- Match experts to requests using configurable rules
-- Support for profiles, skills, and availability (adjust to reflect actual features)
-- Extensible architecture for integrating additional data sources
+Collect public posts and comments from startup-related subreddits.
 
-## Quick start
+Analyze posts for intent — such as “looking for feedback,” “seeking cofounders,” or “need marketing help.”
 
-Prerequisites
+Extract expertise areas mentioned by helpful commenters.
 
-- Git
-- Node.js >= 14 and npm or yarn (or replace with Python/Ruby/Go as appropriate)
-- PostgreSQL / MongoDB / other database if required by the project
+Match founders and experts with overlapping interests, creating a bridge for meaningful collaboration.
 
-Clone the repository
+The app runs off-platform and does not post or message users automatically.
+Its main purpose is to help Redditors discover opportunities through an external dashboard.
 
-```bash
-git clone https://github.com/little-green19/expert-matcher.git
-cd expert-matcher
-```
+🔍 Intended Reddit Communities
 
-Install dependencies
+Read-only analysis will focus on the following public subreddits:
 
-```bash
-# Using npm
-npm install
-# or using yarn
-yarn
-```
+r/startups
 
-Configure
+r/Entrepreneur
 
-- Copy example environment file and edit it:
+r/smallbusiness
 
-```bash
-cp .env.example .env
-# Then open .env and set required variables
-```
+r/SideProject
 
-Run the application
+r/cofounder
 
-```bash
-# Example for a Node.js app
-npm start
-# or for development with auto-reload
-npm run dev
-```
+No automated posting, commenting, or direct messaging is performed by this application.
 
-Run tests
+🧠 How It Works (Planned Architecture)
+[Reddit API] --> [Data Collector] --> [Analysis Engine] --> [Matching Algorithm] --> [Web Dashboard]
 
-```bash
-npm test
-```
 
-## Development
+Data Collector – Fetches public Reddit threads using the Reddit Data API (read-only).
 
-- Follow existing code style and conventions.
-- Add tests for new features and bug fixes.
+Analysis Engine – NLP processing to identify project needs and skill categories.
 
-## Contributing
+Matching Algorithm – Uses keyword and context similarity to recommend potential matches.
 
-Contributions are welcome. Please follow these steps:
+Web Dashboard – Displays anonymized matches and summaries (under development).
 
-1. Fork the repository
-2. Create a feature branch: `git checkout -b feature/my-feature`
-3. Commit your changes: `git commit -m "Add my feature"`
-4. Push to your branch: `git push origin feature/my-feature`
-5. Open a Pull Request describing your changes
+🧰 Tech Stack (Planned)
 
-## License
+Backend: Python (FastAPI)
 
-Specify the project license here (e.g., MIT). If you don't have a license file yet, consider adding one.
+Database: PostgreSQL
 
-## Contact
+Frontend: React + Tailwind
 
-For questions or support, open an issue in this repository or contact the maintainers.
+Data Source: Reddit Data API (read-only access)
+
+Deployment: Render / Vercel (TBD)
+
+🔐 Privacy & Responsible Use
+
+Only publicly available Reddit data is accessed.
+
+No user authentication, scraping, or private messages are used.
+
+All analysis occurs on aggregated, anonymized data.
+
+The project follows Reddit’s Responsible Builder Policy
+ and does not attempt to identify or contact individual Redditors outside the platform.
+
+💡 Why Not Use Devvit?
+
+Devvit is designed for moderation, subreddit automation, and community engagement tools that operate within Reddit.
+This project requires cross-subreddit data analysis and external processing, which are not supported by Devvit.
+
+🔗 Example API Usage
+import requests
+
+BASE_URL = "https://oauth.reddit.com/r/startups/new"
+headers = {"Authorization": "bearer YOUR_ACCESS_TOKEN", "User-Agent": "founder-matcher/0.1"}
+
+response = requests.get(BASE_URL, headers=headers)
+if response.ok:
+    posts = response.json()["data"]["children"]
+    for post in posts:
+        print(post["data"]["title"])
+
+
+(Example only; not in production.)
+
+🧪 Development Status
+
+🚧 Under active development.
+The current milestone is to build the initial data ingestion and tagging pipeline.
+Future updates will include a minimal web interface for viewing anonymized matches.
+
+👤 Maintainer
+
+Developer: Little-Green19
+Contact: www.founder-expert-matcher.com
+Reddit username (planned operator): u/Little-Green19
